@@ -1,3 +1,4 @@
+package caracteristicasJuego;
 
 public enum TipoPersonaje {
 

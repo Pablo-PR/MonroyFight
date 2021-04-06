@@ -1,4 +1,4 @@
-
+package caracteristicasJuego;
 public abstract class Personaje {
 	
 	private int velocidad, magia, fuerza, dinero;

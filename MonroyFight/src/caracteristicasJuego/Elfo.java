@@ -1,4 +1,4 @@
-
+package caracteristicasJuego;
 public class Elfo extends Personaje{
 
 	public static final int VELOCIDAD_ELFO = 7;

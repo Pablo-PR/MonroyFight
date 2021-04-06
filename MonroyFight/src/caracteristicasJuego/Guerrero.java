@@ -1,4 +1,4 @@
-
+package caracteristicasJuego;
 public class Guerrero extends Personaje{
 
 	public Guerrero(TipoPersonaje raza) {
