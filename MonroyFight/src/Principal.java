@@ -66,17 +66,13 @@ public class Principal {
 
 		for (int i = 1; i <= numJugadores; i++) {
 
-			TipoPersonaje tipo = //solicitarTipoPersonaje();
-			//juego.crearJugador(tipo);
+			TipoPersonaje tipo = solicitarTipoJugador();
+			juego.crearJugador(tipo);
 
 		}
 		return juego;
 	}
 
-	private static TipoPersonaje solicitarTipoPersonaje() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	private static TipoPersonaje solicitarTipoJugador() {
 		

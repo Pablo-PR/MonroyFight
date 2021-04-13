@@ -58,7 +58,7 @@ public class Juego {
 
 
 	public void crearJugador(TipoPersonaje tipo) {
-		// TODO Auto-generated method stub
+		Jugador jugadora = new Jugador();
 		
 	}
 
