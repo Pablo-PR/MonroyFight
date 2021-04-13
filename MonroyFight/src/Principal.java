@@ -62,15 +62,20 @@ public class Principal {
 			numJugadores = Integer.parseInt(teclado.nextLine());
 		} while (numJugadores < Constantes.MINIMO_JUGADORES || numJugadores > Constantes.MAXIMO_JUGADORES);
 
-		Juego juego = new Juego(Constantes.ALTO, Constantes.ANCHO, numJugadores);
+		Juego juego = new Juego(Constantes.ALTO_TABLERO, Constantes.ANCHO_TABLERO, numJugadores);
 
 		for (int i = 1; i <= numJugadores; i++) {
 
-			TipoPersonaje tipo = solicitarTipoPersonaje();
-			juego.crearJugador(tipo);
+			TipoPersonaje tipo = //solicitarTipoPersonaje();
+			//juego.crearJugador(tipo);
 
 		}
 		return juego;
+	}
+
+	private static TipoPersonaje solicitarTipoPersonaje() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private static TipoPersonaje solicitarTipoJugador() {

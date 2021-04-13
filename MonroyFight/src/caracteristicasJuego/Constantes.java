@@ -2,13 +2,35 @@ package caracteristicasJuego;
 
 public class Constantes {
 
-	private static final int LONGITUD_MAX_TABLERO=10;
-	private static final int LONGITUD_MIN_TABLERO=1;
-	private static final int MAX_NUM_JUGADORES=6;
-	private static final int MIN_NUM_JUGADORES=2;
-	private static final int MIN_DINERO=0;
+	public static final int ALTO_TABLERO=10;
+	public static final int ANCHO_TABLERO=10;
+	public static final int NUM_POZOS=;
+	public static final int NUM_ROCAS=;
+	public static final int NUM_GEMAS=;
+	public static final int NUM_POCIONES=;
+	public static final int NUM_DINERO=;
+	public static final int MINIMO_JUGADORES=2;
+	public static final int MAXIMO_JUGADORES=6;
+
+	public static final char SIMBOLO_ROCA='R';
+	public static final char SIMBOLO_POZO='W';
+	public static final char SIMBOLO_GEMA='G';
+	public static final char SIMBOLO_POCION='P';
+	public static final char SIMBOLO_DINERO='M';
+	public static final char[] ID_JUGADORES= {'A', 'B', 'C', 'X', 'Y', 'Z'};
 	
-	public Constantes() {
-		
-	}
+	public static final int VELOCIDAD_ELFO = 7;
+	public static final int MAGIA_ELFO = 6;
+	public static final int FUERZA_ELFO = 5;
+	public static final int VELOCIDAD_OGRO = 4;
+	public static final int MAGIA_OGRO = 4;
+	public static final int FUERZA_OGRO = 7;
+	public static final int VELOCIDAD_GUERRERO = 5;
+	public static final int MAGIA_GUERRERO = 5;
+	public static final int FUERZA_GUERRERO = 6;
+	public static final int VELOCIDAD_MAGO = 6;
+	public static final int MAGIA_MAGO = 7;
+	public static final int FUERZA_MAGO = 4;
+	public static final int MAGIA_MAXIMA_POZO = 7;
+
 }
