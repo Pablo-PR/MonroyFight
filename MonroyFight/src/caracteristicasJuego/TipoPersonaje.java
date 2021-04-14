@@ -2,10 +2,10 @@ package caracteristicasJuego;
 
 public enum TipoPersonaje {
 
-	ELFO(Elfo.VELOCIDAD_ELFO, Elfo.MAGIA_ELFO, Elfo.FUERZA_ELFO),
-	OGRO(Ogro.VELOCIDAD_OGRO, Ogro.MAGIA_OGRO, Ogro.FUERZA_OGRO),
-	GUERRERO(Guerrero.VELOCIDAD_GUERRERO, Guerrero.MAGIA_GUERRERO, Guerrero.FUERZA_GUERRERO),
-	MAGO(Mago.VELOCIDAD_MAGO, Mago.MAGIA_MAGO, Mago.FUERZA_MAGO);
+	ELFO(Constantes.VELOCIDAD_ELFO, Constantes.MAGIA_ELFO, Constantes.FUERZA_ELFO),
+	OGRO(Constantes.VELOCIDAD_OGRO, Constantes.MAGIA_OGRO, Constantes.FUERZA_OGRO),
+	GUERRERO(Constantes.VELOCIDAD_GUERRERO, Constantes.MAGIA_GUERRERO, Constantes.FUERZA_GUERRERO),
+	MAGO(Constantes.VELOCIDAD_MAGO, Constantes.MAGIA_MAGO, Constantes.FUERZA_MAGO);
 	
 	public int velocidad, magia, fuerza;
 	

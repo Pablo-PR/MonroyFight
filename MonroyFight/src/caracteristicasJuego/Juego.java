@@ -58,7 +58,7 @@ public class Juego {
 
 
 	public void crearJugador(TipoPersonaje tipo) {
-		Jugador jugadora = new Jugador();
+		Jugador jugadorA = new Jugador();
 		
 	}
 
