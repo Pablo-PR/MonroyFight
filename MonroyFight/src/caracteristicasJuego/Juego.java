@@ -1,6 +1,6 @@
 package caracteristicasJuego;
 
-public class Juego {
+public class Juego implements Posicionar{
 
 	private ElementosTablero tablero[][];
 	private Jugador jugadores[];
@@ -58,8 +58,11 @@ public class Juego {
 
 
 	public void crearJugador(TipoPersonaje tipo) {
-		Jugador jugadorA = new Jugador();
+		Jugador jugadorA = new Jugador(tipo, obtenerPosicion(), obtenerPosicion());
 		
 	}
+	
+	
+	
 
 }

@@ -1,39 +1,49 @@
 package caracteristicasJuego;
 
-public class Jugador {
+public class Jugador{
 
-	private Rocas rocas;
-	private Gema gemas;
-	private Pociones pociones;
 	private TipoPersonaje raza;
-	private int numMovimientos, posicionX, posicionY;
-	private static int contadorPosiciones=0;
+	private int numGemas, numPociones, cantidadDinero, posicionX, posicionY;
 	
-	public Jugador(TipoPersonaje raza) {
+	
+	public Jugador(TipoPersonaje raza, int posicionX, int posicionY) {
 		this.raza=raza;
-		this.posicionX=obtenerPosicionX();
-		this.posicionY=obtenerPosicionY();;
+		this.numGemas=0;
+		this.numPociones=0;
+		this.cantidadDinero=0;
+		this.posicionX=posicionX;
+		this.posicionY=posicionY;
 	}
 
 	
-
 	public TipoPersonaje getRaza() {
 		return raza;
 	}
 	
-
-	public void setRaza(TipoPersonaje raza) {
-		this.raza = raza;
+	public int getNumGemas() {
+		return numGemas;
 	}
 
-	public int getNumMovimientos() {
-		return numMovimientos;
+	public void setNumGemas(int numGemas) {
+		this.numGemas = numGemas;
 	}
 
-	public void setNumMovimientos(int numMovimientos) {
-		this.numMovimientos = numMovimientos;
+	public int getNumPociones() {
+		return numPociones;
 	}
 
+	public void setNumPociones(int numPociones) {
+		this.numPociones = numPociones;
+	}
+
+	public int getCantidadDinero() {
+		return cantidadDinero;
+	}
+
+	public void setCantidadDinero(int cantidadDinero) {
+		this.cantidadDinero = cantidadDinero;
+	}
+	
 	public int getPosicionX() {
 		return posicionX;
 	}
@@ -49,29 +59,12 @@ public class Jugador {
 	public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;
 	}
-	
-	private int obtenerPosicionX() {
-		int posicionX=Constantes.POSICIONES_SALIDA_EJE_X;
-		contadorPosiciones++;
-		return posicionX;
-	}
-	
-	private int obtenerPosicionY() {
-		
-		return 0;
-	}
 
-	
 	private int tirarDado() {
-		int movimientos=(int)(Math.random() * raza.getVelocidad()) + Constantes.MINIMO_MOV_JUGADOR;
+		int movimientos=(int)(Math.random() * raza.getVelocidad() + Constantes.MINIMO_MOV_JUGADOR);
+		
 		return movimientos;
 	}
-
-	@Override
-	public String toString() {
-		return "Raza del jugador: " + raza + ", posicionX=" + posicionX + ", posicionY=" + posicionY + "]";
-	}
-	
 	
 	
 }

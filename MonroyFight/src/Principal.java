@@ -19,7 +19,7 @@ public class Principal {
 			System.out.println(juego.valoresJugadores());
 			
 			while (!juego.isTerminado()) {
-				int dado = juego.getNumeroMovimientosJugador();
+				int dado = //jugador.tirarDado();
 				
 				System.out.println(
 						"Le toca al jugador " + juego.getJugadorTurno() + ". El dado saca " + dado + " movimientos");
@@ -81,7 +81,7 @@ public class Principal {
 
 		do {
 			try {
-				System.out.println("Elija el tipo de jugador:" + Arrays.toString(TipoPersonaje.values()));
+				System.out.println("Elija el tipo de jugador: " + Arrays.toString(TipoPersonaje.values()));
 				tipo = TipoPersonaje.valueOf(teclado.nextLine().toUpperCase());
 				hayError = false;
 			} catch (IllegalArgumentException e) {
