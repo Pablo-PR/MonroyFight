@@ -2,6 +2,9 @@ package caracteristicasJuego;
 
 public class Jugador {
 
+	private Rocas rocas;
+	private Gema gemas;
+	private Pociones pociones;
 	private TipoPersonaje raza;
 	private int numMovimientos, posicionX, posicionY;
 	private static int contadorPosiciones=0;
