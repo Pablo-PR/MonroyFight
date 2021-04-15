@@ -2,7 +2,6 @@ package caracteristicasJuego;
 
 public class Jugador {
 
-	private Rocas rocas;
 	private Gema gemas;
 	private Pociones pociones;
 	private TipoPersonaje raza;
