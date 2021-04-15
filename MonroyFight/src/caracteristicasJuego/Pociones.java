@@ -1,11 +1,8 @@
 package caracteristicasJuego;
 
-public class Pociones {
-
-	private int posicionX, posicionY;
+public class Pociones extends ElementosTablero{
 	
-	public Pociones(int posicionX, int posicionY) {
-		this.posicionX=posicionX;
-		this.posicionY=posicionY;
+	public Pociones(int posicionX, int posicionY, int cantidad) {
+		super(posicionX, posicionY, cantidad);
 	}
 }

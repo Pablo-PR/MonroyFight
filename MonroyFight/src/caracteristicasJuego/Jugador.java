@@ -5,7 +5,7 @@ public class Jugador{
 	private TipoPersonaje raza;
 	private int numGemas, numPociones, cantidadDinero, posicionX, posicionY;
 	
-	
+
 	public Jugador(TipoPersonaje raza, int posicionX, int posicionY) {
 		this.raza=raza;
 		this.numGemas=0;
@@ -48,16 +48,8 @@ public class Jugador{
 		return posicionX;
 	}
 
-	public void setPosicionX(int posicionX) {
-		this.posicionX = posicionX;
-	}
-
 	public int getPosicionY() {
 		return posicionY;
-	}
-
-	public void setPosicionY(int posicionY) {
-		this.posicionY = posicionY;
 	}
 
 	private int tirarDado() {
