@@ -5,7 +5,8 @@ public class Juego {
 	private ElementosTablero tablero[][];
 	private Jugador jugadores[];
 	private int alto, ancho, numJugadores, contadorJugador, jugadorJuega;
-	boolean finished;
+	boolean finished, primerJugador;
+	char ganadorJuego;
 
 	public Juego(int alto, int ancho, int numJugadores) {
 		this.alto = alto;
@@ -16,6 +17,8 @@ public class Juego {
 		finished = false;
 		tablero = new ElementosTablero[alto][ancho];
 		jugadores = new Jugador[numJugadores];
+		primerJugador=false;
+		ganadorJuego=' ';
 	}
 
 	public Jugador[] getJugadores() {
@@ -77,68 +80,87 @@ public class Juego {
 		int posicionY = jugadores[jugadorJuega].getPosicionX();
 		
 		switch (direccion) {
-		case 'N':
+		case 'N':{
 			int posicionFuturaX = posicionX--;
 			int posicionFuturaY = posicionY;
 			
-			if (comprobarHueco(posicionFuturaX, posicionFuturaY)) {
-				avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
-			}
-			else {
-				if (tablero[posicionFuturaX][posicionFuturaY] instanceof Gema) {
-					avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
-					jugadores[jugadorJuega].recogerGema();
-				}
-				if (tablero[posicionFuturaX][posicionFuturaY] instanceof Dinero) {
-					avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
-					jugadores[jugadorJuega].recogerDinero();
-				}
-				if (tablero[posicionFuturaX][posicionFuturaY] instanceof Pociones) {
-					avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
-					jugadores[jugadorJuega].recogerPocion();
-				}
-				if (tablero[posicionFuturaX][posicionFuturaY] instanceof Pozo) {
-					if (conflictoPozo()) {
-						System.out.println("El jugador ha ganado");
-						avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
-					}
-					else {
-						System.out.println("El pozo ha ganado");
-					}
-				}
-				if (tablero[posicionFuturaX][posicionFuturaY] instanceof Rocas) {
-					if (jugadores[jugadorJuega].getNumGemas() > 0) {
-						jugadores[jugadorJuega].usarGema();
-						avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
-					}
-					else {
-						System.out.println("Hay una roca, seguro que se podria romper con algo.");
-					}
-				}
-				if (tablero[posicionFuturaX][posicionFuturaY] instanceof Jugador) {
-					Jugador jugadorAtacar;
-					jugadorAtacar=(Jugador) tablero[posicionFuturaX][posicionFuturaY];
-					conflictoJugador(jugadorAtacar);
-					avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
-					jugadores[jugadorJuega].recogerPocion();
-				}
-				 
-				
-			}
+			tratarMovimientos(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
 			
-			
-			break;
-		case 'S':
-			jugadores[jugadorJuega].setPosicionY(posicionX++);
-			break;
-		case 'E':
-			jugadores[jugadorJuega].setPosicionX(posicionY++);
-			break;
-		case 'O':
-			jugadores[jugadorJuega].setPosicionX(posicionY--);
 			break;
 		}
+		case 'S':{
+			int posicionFuturaX = posicionX++;
+			int posicionFuturaY = posicionY;
+			
+			tratarMovimientos(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+			break;
+		}
+		case 'E':{
+			int posicionFuturaX = posicionX;
+			int posicionFuturaY = posicionY++;
+			
+			tratarMovimientos(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+			break;
+		}
+		case 'O':{
+			int posicionFuturaX = posicionX;
+			int posicionFuturaY = posicionY--;
+			
+			tratarMovimientos(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+			break;
+		}
+		}
 		
+	}
+
+	public void tratarMovimientos(int posicionX, int posicionY, int posicionFuturaX, int posicionFuturaY) {
+		if (comprobarHueco(posicionFuturaX, posicionFuturaY)) {
+			avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+		}
+		else {
+			if (tablero[posicionFuturaX][posicionFuturaY] instanceof Gema) {
+				avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+				jugadores[jugadorJuega].recogerGema();
+			}
+			if (tablero[posicionFuturaX][posicionFuturaY] instanceof Dinero) {
+				avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+				jugadores[jugadorJuega].recogerDinero();
+				if(jugadores[jugadorJuega].getCantidadDinero() == Constantes.NUM_DINERO) {
+					finished=true;
+					ganadorJuego=jugadores[jugadorJuega].getSimbolo();
+				}
+			}
+			if (tablero[posicionFuturaX][posicionFuturaY] instanceof Pociones) {
+				avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+				jugadores[jugadorJuega].recogerPocion();
+			}
+			if (tablero[posicionFuturaX][posicionFuturaY] instanceof Pozo) {
+				if (conflictoPozo()) {
+					System.out.println("El jugador ha ganado");
+					avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+				}
+				else {
+					System.out.println("El pozo ha ganado");
+				}
+			}
+			if (tablero[posicionFuturaX][posicionFuturaY] instanceof Rocas) {
+				if (jugadores[jugadorJuega].getNumGemas() > 0) {
+					jugadores[jugadorJuega].usarGema();
+					avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+				}
+				else {
+					System.out.println("Hay una roca, seguro que se podria romper con algo.");
+				}
+			}
+			if (tablero[posicionFuturaX][posicionFuturaY] instanceof Jugador) {
+				Jugador jugadorAtacar;
+				jugadorAtacar=(Jugador) tablero[posicionFuturaX][posicionFuturaY];
+				
+				if(conflictoJugador(jugadorAtacar)) {
+					avanzarCasilla(posicionX, posicionY, posicionFuturaX, posicionFuturaY);
+				}
+			}
+		}
 	}
 
 	private void avanzarCasilla(int posicionX, int posicionY, int posicionFuturaX, int posicionFuturaY) {
@@ -271,23 +293,16 @@ public class Juego {
 	
 	
 	public char getJugadorTurno() {
-		boolean primeroCreado=false;
-		int primerJugador=0;
+		int jugadorEmpieza=0;
 		char simboloJugador;
 		
-		if(!primeroCreado) {
-			primerJugador=(int)(Math.random() * numJugadores + 1);
-			jugadorJuega=primerJugador;
-			primeroCreado=true;
-			simboloJugador=jugadores[primerJugador].getSimbolo();
-		}else {
-			jugadorJuega++;
-			if(jugadorJuega > numJugadores) {
-				jugadorJuega=0;
-			}
-			simboloJugador=jugadores[jugadorJuega].getSimbolo();
+		if(!primerJugador) {
+			jugadorEmpieza=(int)(Math.random() * numJugadores + 1);
+			jugadorJuega=jugadorEmpieza;
+			primerJugador=true;
 		}
 		
+		simboloJugador=jugadores[jugadorJuega].getSimbolo();
 		return simboloJugador;
 	}
 
@@ -310,41 +325,106 @@ public class Juego {
 	}
 	
 	public boolean conflictoJugador(Jugador jugadorAtacar) {
-		boolean jugadorGana=false;
+		boolean jugadorPasa=false;
 		
 		int puntuacionJugador=(int) (Math. random() * jugadores[jugadorJuega].getRaza().getFuerza()) + 1;
 		int puntuacionJugadorAtacar=(int) (Math. random() * jugadorAtacar.getRaza().getMagia()) + 1;
 		
 		if(puntuacionJugador > puntuacionJugadorAtacar) {
-			if (jugadorAtacar.getNumPociones() > 0) {
-				System.out.println("El jugador " + jugadores[jugadorJuega].getSimbolo() + " gana, pero el jugador " + jugadorAtacar.getSimbolo() + " tiene una poción, por lo que conserva su dinero.");
-				jugadorAtacar.usarPocion();
-			}
-			else {
-				if (jugadorAtacar.getCantidadDinero() > 0) {
-					jugadorAtacar.perderDinero(jugadores[jugadorJuega]);
-				}
-				else {
-					tablero[jugadorAtacar.getPosicionX()][jugadorAtacar.getPosicionY()] = null;
-				}
-			}
-			jugadorGana=true;
+			Jugador ganador = jugadores[jugadorJuega];
+			Jugador perdedor = jugadorAtacar;
+			
+			jugadorPasa = combateJugadores(perdedor, ganador);
 		}
 		else {
+			Jugador ganador = jugadorAtacar;
+			Jugador perdedor = jugadores[jugadorJuega];
 			
+			jugadorPasa = combateJugadores(perdedor, ganador);
 		}
-		return jugadorGana;
+		return jugadorPasa;
 	}
 
-	public String toString() {
+	public boolean combateJugadores(Jugador perdedor, Jugador ganador) {
+		boolean jugadorPasa=false;
+		if (perdedor.getNumPociones() > 0) {
+			System.out.println("El jugador " + ganador.getSimbolo() + " gana, pero el jugador " + perdedor.getSimbolo() + " tiene una poción, por lo que conserva su dinero.");
+			perdedor.usarPocion();
+		}
+		else {
+			if (perdedor.getCantidadDinero() > 0) {
+				perdedor.perderDinero(ganador);
+				if(ganador.getCantidadDinero() == Constantes.NUM_DINERO) {
+					finished=true;
+					ganadorJuego=ganador.getSimbolo();
+				}
+			}
+			else {
+				tablero[perdedor.getPosicionX()][perdedor.getPosicionY()] = null;
+				numJugadores--;
+				if(numJugadores==1) {
+					finished=true;
+					ganadorJuego=ganador.getSimbolo();
+				}
+				jugadorPasa=true;
+			}
+		}
+		return jugadorPasa;
+	}
+
+	public String nombresJugadores() {
 		String c = null;
 		StringBuilder sb = new StringBuilder(c);
 		for (int i = 0; i < numJugadores; i++) {
 			sb.append("\nEl jugador numero " + (i+1) + " es el caracter: " + jugadores[i].getSimbolo() + ".\n");
+		}
+		c=sb.toString();
+		return c;
+	}
+
+	public String valoresJugadores() {
+		String c = null;
+		StringBuilder sb = new StringBuilder(c);
+		for (int i = 0; i < numJugadores; i++) {
+			sb.append("\nJugador " + jugadores[i].getSimbolo() + ":\n");
 			sb.append("Gemas: " + jugadores[i].getNumGemas() + " Dinero: " + jugadores[i].getCantidadDinero() + " Pociones: " + jugadores[i].getNumPociones());
 		}
 		c=sb.toString();
 		return c;
 	}
 
-}
+	public void proximoJugador() {
+		jugadorJuega++;
+		
+		if(jugadorJuega > numJugadores) {
+			jugadorJuega=0;
+		}
+	}
+
+	public char getGanador() {
+		return ganadorJuego;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	}

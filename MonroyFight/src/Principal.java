@@ -16,7 +16,8 @@ public class Principal {
 			Juego juego = crearJuego();
 			juego.introducirElementosTablero();
 			juego.imprimirTablero();
-			System.out.println(juego);
+			System.out.println(juego.nombresJugadores());
+			System.out.println(juego.valoresJugadores());
 			
 			while (!juego.isFinished()) {
 				int dado = juego.tirarDado();
@@ -28,7 +29,7 @@ public class Principal {
 
 					direccion = solicitarMovimiento();
 
-					System.out.println(juego.moverJugador(direccion));
+					juego.moverJugador(direccion);
 
 					juego.imprimirTablero();
 					System.out.println(juego.valoresJugadores());
