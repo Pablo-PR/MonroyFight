@@ -14,11 +14,12 @@ public class Principal {
 		char direccion;
 		try {
 			Juego juego = crearJuego();
+			juego.introducirElementosTablero();
 			juego.imprimirTablero();
 			System.out.println(juego);
 			
 			while (!juego.isFinished()) {
-				int dado = Juego.tirarDado();
+				int dado = juego.tirarDado();
 				
 				System.out.println(
 						"Le toca al jugador " + juego.getJugadorTurno() + ". El dado saca " + dado + " movimientos");
@@ -29,7 +30,7 @@ public class Principal {
 
 					System.out.println(juego.moverJugador(direccion));
 
-					System.out.println(juego);
+					juego.imprimirTablero();
 					System.out.println(juego.valoresJugadores());
 
 				}
@@ -46,10 +47,12 @@ public class Principal {
 
 	private static char solicitarMovimiento() {
 		char direccion;
+		
 		do {
 			System.out.println("Indique a donde desea moverse: N: Norte, S: Sur, E: Este u O: Oeste");
 			direccion = teclado.nextLine().charAt(0);
 		} while (direccion != 'N' && direccion != 'S' && direccion != 'E' && direccion != 'O');
+		
 		return direccion;
 	}
 

@@ -1,13 +1,6 @@
 package caracteristicasJuego;
 
 public class Jugador extends ElementosTablero{
-	//extends ElementosTablero
-	/*
-	 * Cómo usar cantidad en clase Jugador
-	 * generar jugador while cantidad<=6
-	 * elegir el nombre del jugador entre los simbolos posibles (se puede enum)
-	 * 
-	 * */
 
 	private TipoPersonaje raza;
 	private int numGemas, numPociones, cantidadDinero, posicionX, posicionY;
@@ -52,16 +45,8 @@ public class Jugador extends ElementosTablero{
 		return numGemas;
 	}
 
-	public void setNumGemas(int numGemas) {
-		this.numGemas = numGemas;
-	}
-
 	public int getNumPociones() {
 		return numPociones;
-	}
-
-	public void setNumPociones(int numPociones) {
-		this.numPociones = numPociones;
 	}
 
 	public int getCantidadDinero() {
@@ -72,8 +57,28 @@ public class Jugador extends ElementosTablero{
 		this.cantidadDinero = cantidadDinero;
 	}
 	
+	public void recogerGema() {
+		numGemas++;
+	}
 
+	public void usarGema() {
+		numGemas--;
+	}
 	
+	public void recogerDinero() {
+		cantidadDinero++;
+	}
 	
+	public void perderDinero(Jugador otro) {
+		otro.setCantidadDinero(otro.cantidadDinero + this.cantidadDinero);
+		this.cantidadDinero=0;
+	}
 	
+	public void recogerPocion() {
+		numPociones++;
+	}
+
+	public void usarPocion() {
+		numPociones--;
+	}
 }

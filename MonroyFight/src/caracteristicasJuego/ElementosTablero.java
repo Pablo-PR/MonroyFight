@@ -4,7 +4,7 @@ public abstract class ElementosTablero {
 
 	protected char simbolo;
 	
-	//Jugador hereda de ElementosTablero
+	
 	public ElementosTablero(char simbolo) {
 		this.simbolo=simbolo;
 	}
