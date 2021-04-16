@@ -2,8 +2,8 @@ package caracteristicasJuego;
 
 public class Pozo extends ElementosTablero{
 
-	public Pozo (int cantidad, int posicionX, int posicionY) {
-		super(cantidad, posicionX, posicionY);
+	public Pozo (char simbolo) {
+		super(simbolo);
 	}
 	
 	

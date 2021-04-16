@@ -1,12 +1,20 @@
 package caracteristicasJuego;
 
-public class Jugador{
+public class Jugador extends ElementosTablero{
+	//extends ElementosTablero
+	/*
+	 * Cómo usar cantidad en clase Jugador
+	 * generar jugador while cantidad<=6
+	 * elegir el nombre del jugador entre los simbolos posibles (se puede enum)
+	 * 
+	 * */
 
 	private TipoPersonaje raza;
 	private int numGemas, numPociones, cantidadDinero, posicionX, posicionY;
 	
 
-	public Jugador(TipoPersonaje raza, int posicionX, int posicionY) {
+	public Jugador(TipoPersonaje raza, int posicionX, int posicionY, char simbolo) {
+		super(simbolo);
 		this.raza=raza;
 		this.numGemas=0;
 		this.numPociones=0;
@@ -16,6 +24,26 @@ public class Jugador{
 	}
 
 	
+	public int getPosicionX() {
+		return posicionX;
+	}
+
+
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
+	}
+
+
+	public int getPosicionY() {
+		return posicionY;
+	}
+
+
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
+	}
+
+
 	public TipoPersonaje getRaza() {
 		return raza;
 	}
@@ -44,19 +72,8 @@ public class Jugador{
 		this.cantidadDinero = cantidadDinero;
 	}
 	
-	public int getPosicionX() {
-		return posicionX;
-	}
 
-	public int getPosicionY() {
-		return posicionY;
-	}
-
-	private int tirarDado() {
-		int movimientos=(int)(Math.random() * raza.getVelocidad() + Constantes.MINIMO_MOV_JUGADOR);
-		
-		return movimientos;
-	}
+	
 	
 	
 }

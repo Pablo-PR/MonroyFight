@@ -1,39 +1,20 @@
 package caracteristicasJuego;
 
-public abstract class ElementosTablero implements Posicionar{
+public abstract class ElementosTablero {
 
-	private int cantidad, posicionX, posicionY;
+	protected char simbolo;
 	
-	
-	public ElementosTablero(int posicionX, int posicionY, int cantidad) {
-		this.posicionX=obtenerPosicion();
-		this.posicionY=obtenerPosicion();
-		this.cantidad=cantidad;
+	//Jugador hereda de ElementosTablero
+	public ElementosTablero(char simbolo) {
+		this.simbolo=simbolo;
 	}
 	
-	public int getCantidad() {
-		return cantidad;
+
+	public char getSimbolo() {
+		return simbolo;
 	}
 	
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
 	
-	public int getPosicionX() {
-		return posicionX;
-	}
-	
-	public void setPosicionX(int posicionX) {
-		this.posicionX = posicionX;
-	}
-	
-	public int getPosicionY() {
-		return posicionY;
-	}
-	
-	public void setPosicionY(int posicionY) {
-		this.posicionY = posicionY;
-	}
 	
 	
 }

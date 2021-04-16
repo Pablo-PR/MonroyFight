@@ -14,17 +14,16 @@ public class Principal {
 		char direccion;
 		try {
 			Juego juego = crearJuego();
+			juego.imprimirTablero();
 			System.out.println(juego);
-			System.out.println(juego.nombresJugadores());
-			System.out.println(juego.valoresJugadores());
 			
-			while (!juego.isTerminado()) {
-				int dado = //jugador.tirarDado();
+			while (!juego.isFinished()) {
+				int dado = Juego.tirarDado();
 				
 				System.out.println(
 						"Le toca al jugador " + juego.getJugadorTurno() + ". El dado saca " + dado + " movimientos");
 				
-				for (int i = 1; i <= dado && !juego.isTerminado(); i++) {
+				for (int i = 1; i <= dado && !juego.isFinished(); i++) {
 
 					direccion = solicitarMovimiento();
 
