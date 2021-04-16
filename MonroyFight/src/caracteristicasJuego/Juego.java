@@ -205,7 +205,7 @@ public class Juego {
 
 	public void introducirElementosTablero() {
 		for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero.length; j++) {
+            for (int j = 0; j < tablero[i].length; j++) {
                 
             	introducirElementos(Constantes.NUM_ROCAS, Constantes.SIMBOLO_ROCA);
             	introducirElementos(Constantes.NUM_GEMAS, Constantes.SIMBOLO_GEMA);
@@ -218,19 +218,18 @@ public class Juego {
 	}
 
 	public void introducirJugadores() {
-		boolean posicionado=false;
+		contadorJugador=0;
+		int k=0;
 		
-		for (int k = 0; k < contadorJugador; k++) {
-			do {
-				if(tablero[jugadores[contadorJugador].getPosicionX()][jugadores[contadorJugador].getPosicionY()] == null) {
-					
-					tablero[jugadores[contadorJugador].getPosicionX()][jugadores[contadorJugador].getPosicionY()] = jugadores[contadorJugador];
-					posicionado=true;
-				}else {
-					jugadores[contadorJugador].setPosicionX(obtenerCoordenada());
-					jugadores[contadorJugador].setPosicionY(obtenerCoordenada());
-				}
-			}while(!posicionado);
+		while (k < numJugadores) {
+			if(tablero[jugadores[contadorJugador].getPosicionX()][jugadores[contadorJugador].getPosicionY()] == null) {
+				tablero[jugadores[contadorJugador].getPosicionX()][jugadores[contadorJugador].getPosicionY()] = jugadores[contadorJugador];
+				contadorJugador++;
+			}else {
+				jugadores[contadorJugador].setPosicionX(obtenerCoordenada());
+				jugadores[contadorJugador].setPosicionY(obtenerCoordenada());
+			}
+			k++;
 		}
 	}
 
@@ -404,27 +403,5 @@ public class Juego {
 	public char getGanador() {
 		return ganadorJuego;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	}
+}
