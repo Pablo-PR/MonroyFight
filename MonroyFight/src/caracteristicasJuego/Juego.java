@@ -184,7 +184,7 @@ public class Juego {
 
             for (int y = 0; y < tablero[x].length; y++) {
             	if(comprobarHueco(x,y)) {
-            		System.out.println(' ');
+            		System.out.print(' ');
             	}else {
             		System.out.print(tablero[x][y].getSimbolo());
             	}
@@ -204,33 +204,32 @@ public class Juego {
 	}
 
 	public void introducirElementosTablero() {
-		for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero[i].length; j++) {
-                
-            	introducirElementos(Constantes.NUM_ROCAS, Constantes.SIMBOLO_ROCA);
-            	introducirElementos(Constantes.NUM_GEMAS, Constantes.SIMBOLO_GEMA);
-            	introducirElementos(Constantes.NUM_POZOS, Constantes.SIMBOLO_POZO);
-            	introducirElementos(Constantes.NUM_POCIONES, Constantes.SIMBOLO_POCION);
-            	introducirElementos(Constantes.NUM_DINERO, Constantes.SIMBOLO_DINERO);
-            	introducirJugadores();
-            }
-        }
+	
+		introducirElementos(Constantes.NUM_ROCAS, Constantes.SIMBOLO_ROCA);
+		introducirElementos(Constantes.NUM_GEMAS, Constantes.SIMBOLO_GEMA);
+		introducirElementos(Constantes.NUM_POZOS, Constantes.SIMBOLO_POZO);
+		introducirElementos(Constantes.NUM_POCIONES, Constantes.SIMBOLO_POCION);
+		introducirElementos(Constantes.NUM_DINERO, Constantes.SIMBOLO_DINERO);
+		introducirJugadores();
+		
 	}
 
 	public void introducirJugadores() {
 		contadorJugador=0;
 		int k=0;
 		
-		while (k < numJugadores) {
+		do {
 			if(tablero[jugadores[contadorJugador].getPosicionX()][jugadores[contadorJugador].getPosicionY()] == null) {
 				tablero[jugadores[contadorJugador].getPosicionX()][jugadores[contadorJugador].getPosicionY()] = jugadores[contadorJugador];
+				
 				contadorJugador++;
+				k++;
 			}else {
 				jugadores[contadorJugador].setPosicionX(obtenerCoordenada());
 				jugadores[contadorJugador].setPosicionY(obtenerCoordenada());
 			}
-			k++;
-		}
+		} while (k < numJugadores);
+		
 	}
 
 	public void introducirElementos(int cantidad, char simboloElemento) {
@@ -264,7 +263,6 @@ public class Juego {
 					case Constantes.SIMBOLO_POZO:
 						elementoAIntroducir = new Pozo(simboloElemento);
 						break;
-						
 					}
 					
 					termina=true;
@@ -272,7 +270,7 @@ public class Juego {
 				}
 			}while(!termina);
 			
-			}
+		}
 	}
 
 	public boolean comprobarHueco(int x, int y) {
@@ -372,24 +370,24 @@ public class Juego {
 	}
 
 	public String nombresJugadores() {
-		String c = null;
-		StringBuilder sb = new StringBuilder(c);
+		StringBuilder sbJugadores = new StringBuilder();
+		
 		for (int i = 0; i < numJugadores; i++) {
-			sb.append("\nEl jugador numero " + (i+1) + " es el caracter: " + jugadores[i].getSimbolo() + ".\n");
+			sbJugadores.append("\nEl jugador numero " + (i+1) + " es el caracter: " + jugadores[i].getSimbolo());
 		}
-		c=sb.toString();
-		return c;
+		
+		return sbJugadores.toString();
 	}
 
 	public String valoresJugadores() {
-		String c = null;
-		StringBuilder sb = new StringBuilder(c);
+		StringBuilder sbValoresJugadores = new StringBuilder();
+		
 		for (int i = 0; i < numJugadores; i++) {
-			sb.append("\nJugador " + jugadores[i].getSimbolo() + ":\n");
-			sb.append("Gemas: " + jugadores[i].getNumGemas() + " Dinero: " + jugadores[i].getCantidadDinero() + " Pociones: " + jugadores[i].getNumPociones());
+			sbValoresJugadores.append("\nJugador " + jugadores[i].getSimbolo() + ":\n"
+					+ "Gemas: " + jugadores[i].getNumGemas() + " Dinero: " + jugadores[i].getCantidadDinero() + " Pociones: " + jugadores[i].getNumPociones() + "\n");
 		}
-		c=sb.toString();
-		return c;
+		
+		return sbValoresJugadores.toString();
 	}
 
 	public void proximoJugador() {
