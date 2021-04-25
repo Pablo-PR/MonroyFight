@@ -62,7 +62,8 @@ public class Principal {
 		
 		do {
 			System.out.println("Indique a donde desea moverse: N: Norte, S: Sur, E: Este u O: Oeste");
-			direccion = teclado.nextLine().charAt(0);
+			direccion = teclado.nextLine().toUpperCase().charAt(0);
+			
 		} while (direccion != 'N' && direccion != 'S' && direccion != 'E' && direccion != 'O');
 		
 		return direccion;
