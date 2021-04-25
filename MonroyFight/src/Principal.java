@@ -5,6 +5,12 @@ import caracteristicasJuego.Juego;
 import caracteristicasJuego.JuegoException;
 import caracteristicasJuego.TipoPersonaje;
 
+/**
+ * 
+ * @author Pablo Parra Rodríguez  &&  Iván Morales Mellado
+ *
+ */
+
 public class Principal {
 
 	public static Scanner teclado = new Scanner(System.in);
@@ -21,24 +27,29 @@ public class Principal {
 			
 			while (!juego.isFinished()) {
 				int dado = juego.tirarDado();
+				juego.setMovimientosJugador(dado);
 				
-				System.out.println(
-						"Le toca al jugador " + juego.getJugadorTurno() + ". El dado saca " + dado + " movimientos");
+				System.out.println("Le toca al jugador " + juego.getJugadorTurno() + ". El dado saca " + dado + " movimientos");
 				
-				for (int i = 1; i <= dado && !juego.isFinished(); i++) {
-
+				for (int i = 1; i <= dado && !juego.isFinished() && juego.getMovimientosJugador() > 0; i++) {
+					
+					if (dado != juego.getMovimientosJugador()) {
+						System.out.println("Le quedan " + juego.getMovimientosJugador() + " movimientos");
+					}
+					
 					direccion = solicitarMovimiento();
 
 					juego.moverJugador(direccion);
 
 					juego.imprimirTablero();
 					System.out.println(juego.valoresJugadores());
-
+					
+					juego.restarMovimiento();
 				}
 				juego.proximoJugador();
 			}
 
-			System.out.println("Juego terminado. El ganador es:" + juego.getGanador());
+			System.out.println("Juego terminado. El ganador es el jugador " + juego.getGanador());
 
 		} catch (JuegoException e) {
 			System.out.println(e.getMessage());
