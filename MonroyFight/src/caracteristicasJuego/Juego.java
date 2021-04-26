@@ -8,6 +8,7 @@ public class Juego {
 	boolean finished, primerJugador;
 	char ganadorJuego;
 
+	
 	public Juego(int alto, int ancho, int numJugadores) {
 		this.alto = alto;
 		this.ancho = ancho;
@@ -22,12 +23,9 @@ public class Juego {
 		ganadorJuego=' ';
 	}
 
+	
 	public Jugador[] getJugadores() {
 		return jugadores;
-	}
-
-	public void setJugadores(Jugador[] jugadores) {
-		this.jugadores = jugadores;
 	}
 
 	public int getAlto() {
@@ -42,10 +40,6 @@ public class Juego {
 		return contadorJugador;
 	}
 
-	public void setContadorJugador(int jugadorJuega) {
-		this.contadorJugador = jugadorJuega;
-	}
-
 	public boolean isFinished() {
 		return finished;
 	}
@@ -56,10 +50,6 @@ public class Juego {
 
 	public int getNumJugadores() {
 		return numJugadores;
-	}
-
-	public void setNumJugadores(int numJugadores) {
-		this.numJugadores = numJugadores;
 	}
 
 	public int getJugadorJuega() {
@@ -77,13 +67,25 @@ public class Juego {
 	public void setMovimientosJugador(int movimientosJugador) {
 		this.movimientosJugador = movimientosJugador;
 	}
+	
+	public char getGanador() {
+		return ganadorJuego;
+	}
 
+	/**
+	 * Método al que se le pasa el tipo de jugador (enumerado) y crea el objeto jugador dentro del array jugadores.
+	 * @param tipo
+	 */
 	public void crearJugador(TipoPersonaje tipo) {
 		jugadores[contadorJugador] = new Jugador(tipo, obtenerCoordenada(), obtenerCoordenada(), Constantes.ID_JUGADORES[contadorJugador]);
 
 		contadorJugador++;
 	}
 
+	/**
+	 * Método que controla los movimientos de los jugadores en el tablero.
+	 * @param direccion
+	 */
 	public void moverJugador(char direccion) {
 		int posicionX = jugadores[jugadorJuega].getPosicionX();
 		int posicionY = jugadores[jugadorJuega].getPosicionY();
@@ -119,9 +121,15 @@ public class Juego {
 			break;
 		}
 		}
-		
 	}
 
+	/**
+	 * Método que ejecuta una acción u otra dependiendo de la casilla a la que vaya a avanzar el jugador.
+	 * @param posicionX
+	 * @param posicionY
+	 * @param posicionFuturaX
+	 * @param posicionFuturaY
+	 */
 	public void tratarMovimientos(int posicionX, int posicionY, int posicionFuturaX, int posicionFuturaY) {
 		if (posicionFuturaX == Constantes.ANCHO_TABLERO) {
 			posicionFuturaX=0;
@@ -187,6 +195,13 @@ public class Juego {
 		}
 	}
 
+	/**
+	 * Método que actualiza la posición antigua en la que estaba el jugador, poniéndola a null, y asignándole la nueva posición en el tablero.
+	 * @param posicionX
+	 * @param posicionY
+	 * @param posicionFuturaX
+	 * @param posicionFuturaY
+	 */
 	private void avanzarCasilla(int posicionX, int posicionY, int posicionFuturaX, int posicionFuturaY) {
 		tablero[posicionX][posicionY] = null;
 		tablero[posicionFuturaX][posicionFuturaY] = jugadores[jugadorJuega];
@@ -197,11 +212,12 @@ public class Juego {
 		else {
 			jugadores[jugadorJuega].setPosicionY(posicionFuturaY);
 		}
-		
 	}
 
+	/**
+	 * Método que imprime por pantalla el tablero con todos los elementos y jugadores.
+	 */
 	public void imprimirTablero() {
-		
 		for (int x = 0; x < tablero.length; x++) {
             System.out.println(".........................................");
             System.out.print("| ");
@@ -224,11 +240,12 @@ public class Juego {
                 System.out.println(".........................................");
             }
 		}
-        
 	}
 
+	/**
+	 * Método que introduce todos los elementos del tablero en la matriz.
+	 */
 	public void introducirElementosTablero() {
-	
 		introducirElementos(Constantes.NUM_ROCAS, Constantes.SIMBOLO_ROCA);
 		introducirElementos(Constantes.NUM_GEMAS, Constantes.SIMBOLO_GEMA);
 		introducirElementos(Constantes.NUM_POZOS, Constantes.SIMBOLO_POZO);
@@ -237,6 +254,9 @@ public class Juego {
 		introducirJugadores();
 	}
 
+	/**
+	 * Método que controla la correcta inserción de los jugadores en el tablero.
+	 */
 	public void introducirJugadores() {
 		contadorJugador=0;
 		int k=0;
@@ -254,6 +274,11 @@ public class Juego {
 		} while (k < numJugadores);
 	}
 
+	/**
+	 * Método que controla la correcta inserción de los objetos y obstáculos en el tablero.
+	 * @param cantidad
+	 * @param simboloElemento
+	 */
 	public void introducirElementos(int cantidad, char simboloElemento) {
 		ElementosTablero elementoAIntroducir=null;
 		boolean termina;
@@ -295,6 +320,11 @@ public class Juego {
 		}
 	}
 
+	/**
+	 * Método que comprueba si una posición de la matriz está vacía (null).
+	 * @param x
+	 * @param y
+	 */
 	public boolean comprobarHueco(int x, int y) {
 		boolean vacio=false;
         	
@@ -305,13 +335,18 @@ public class Juego {
 		return vacio;
 	}
 	
+	/**
+	 * Método que simula la tirada de un dado, generando un número aleatorio entre 1 y la velocidad máxima del jugador.
+	 */
 	public int tirarDado() {
 		movimientosJugador = (int) (Math.random() * jugadores[jugadorJuega].getRaza().getVelocidad() + Constantes.MINIMO_MOV_JUGADOR);
 		
 		return movimientosJugador;
 	}
 	
-	
+	/**
+	 * Método que elige al primer jugador aleatoriamente y controla el orden de los turnos, devolviendo el símbolo del jugador al que le toca.
+	 */
 	public char getJugadorTurno() {
 		int jugadorEmpieza=0;
 		char simboloJugador;
@@ -327,12 +362,19 @@ public class Juego {
 		return simboloJugador;
 	}
 
+	/**
+	 * Método que devuelve un número aleatorio entre 0 y 9, usado para obtener posiciones aleatorias en la matriz tablero.
+	 */
 	public int obtenerCoordenada() {
 		int posicion = (int) (Math.random() * 10);
 
 		return posicion;
 	}
 	
+	/**
+	 * Método que controla la batalla de un jugador con un pozo, generando dos números aleatorios comprendidos entre 1 y
+	 * la magia máxima del jugador, la cual también es la magia máxima del pozo.
+	 */
 	public boolean conflictoPozo() {
 		boolean jugadorPasa=false;
 		int puntuacionPozo=(int) (Math. random() * jugadores[jugadorJuega].getRaza().getMagia()) + 1;
@@ -352,6 +394,11 @@ public class Juego {
 		return jugadorPasa;
 	}
 	
+	/**
+	 * Método que controla la batalla entre jugadores, generando un número aleatorio para cada jugador comprendido entre 1 y
+	 * su fuerza máxima. Se devuelve un boolean para controlar que un jugador solo avance si ha ganado la batalla.
+	 * @param jugadorAtacar
+	 */
 	public boolean conflictoJugador(Jugador jugadorAtacar) {
 		boolean jugadorPasa=false;
 		int puntuacionJugador=0;
@@ -380,35 +427,65 @@ public class Juego {
 		return jugadorPasa;
 	}
 
+	/**
+	 * Método que gestiona las consecuencias del combate entre jugadores dependiendo del número de pociones y de monedas.
+	 * Si muere algún jugador, es eliminado del tablero.
+	 * @param perdedor
+	 * @param ganador
+	 */
 	public boolean combateJugadores(Jugador perdedor, Jugador ganador) {
-		boolean jugadorPasa=false;
+		boolean jugadorPasa = false;
+		boolean jugadorEliminado = false;
+
 		if (perdedor.getNumPociones() > 0) {
-			System.out.println("El jugador " + ganador.getSimbolo() + " gana, pero el jugador " + perdedor.getSimbolo() + " tiene una poción, por lo que conserva su dinero y no muere.");
+			System.out.println("El jugador " + ganador.getSimbolo() + " gana, pero el jugador " + perdedor.getSimbolo()
+					+ " tiene una poción, por lo que conserva su dinero y no muere.");
 			perdedor.usarPocion();
-		}
-		else {
+		} else {
 			if (perdedor.getCantidadDinero() > 0) {
 				perdedor.perderDinero(ganador);
 				System.out.println("El jugador " + ganador.getSimbolo() + " se queda con el dinero del jugador " + perdedor.getSimbolo());
-				if(ganador.getCantidadDinero() == Constantes.NUM_DINERO) {
-					finished=true;
-					ganadorJuego=ganador.getSimbolo();
+				
+				if (ganador.getCantidadDinero() == Constantes.NUM_DINERO) {
+					finished = true;
+					ganadorJuego = ganador.getSimbolo();
+				}
+			} else {
+				tablero[perdedor.getPosicionX()][perdedor.getPosicionY()] = null;
+				numJugadores--;
+				movimientosJugador=0;
+				
+				System.out.println("El jugador " + perdedor.getSimbolo() + " ha muerto");
+
+				for (int i = 0; i < jugadores.length && !jugadorEliminado; i++) {
+					if (perdedor.getSimbolo() == jugadores[i].getSimbolo()) {
+						jugadores[i] = null;
+						jugadorEliminado = true;
+
+						for (int j = i; j < numJugadores; j++) {
+							jugadores[j] = jugadores[j + 1];
+						}
+
+					}
+				}
+				
+				if (ganador.equals(jugadores[jugadorJuega])) {
+					jugadorPasa = true;
 				}
 			}
-			else {
-				tablero[perdedor.getPosicionX()][perdedor.getPosicionY()] = null;
-				System.out.println("El jugador " + perdedor.getSimbolo() + " ha muerto");
-				numJugadores--;
-				if(numJugadores==1) {
-					finished=true;
-					ganadorJuego=ganador.getSimbolo();
-				}
-				jugadorPasa=true;
+
+			if (numJugadores == 1) {
+				finished = true;
+				ganadorJuego = ganador.getSimbolo();
 			}
 		}
+
 		return jugadorPasa;
 	}
 
+	/**
+	 * Método que imprime por pantalla los símbolos de los jugadores del tablero.
+	 */
 	public String nombresJugadores() {
 		StringBuilder sbJugadores = new StringBuilder();
 		
@@ -419,17 +496,24 @@ public class Juego {
 		return sbJugadores.toString();
 	}
 
+	/**
+	 * Método que imprime por pantalla los objetos que posee cada jugador.
+	 */
 	public String valoresJugadores() {
 		StringBuilder sbValoresJugadores = new StringBuilder();
 		
 		for (int i = 0; i < numJugadores; i++) {
 			sbValoresJugadores.append("\nJugador " + jugadores[i].getSimbolo() + ":\n"
 					+ "Gemas: " + jugadores[i].getNumGemas() + " Dinero: " + jugadores[i].getCantidadDinero() + " Pociones: " + jugadores[i].getNumPociones() + "\n");
+			
 		}
 		
 		return sbValoresJugadores.toString();
 	}
 
+	/**
+	 * Método que pasa el turno de un jugador.
+	 */
 	public void proximoJugador() {
 		jugadorJuega++;
 		
@@ -438,10 +522,9 @@ public class Juego {
 		}
 	}
 
-	public char getGanador() {
-		return ganadorJuego;
-	}
-
+	/**
+	 * Método que disminuye los movimientos totales de un jugador en su turno.
+	 */
 	public void restarMovimiento() {
 		movimientosJugador--;		
 	}

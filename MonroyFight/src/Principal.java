@@ -6,9 +6,7 @@ import caracteristicasJuego.JuegoException;
 import caracteristicasJuego.TipoPersonaje;
 
 /**
- * 
  * @author Pablo Parra Rodríguez  &&  Iván Morales Mellado
- *
  */
 
 public class Principal {
@@ -54,7 +52,6 @@ public class Principal {
 		} catch (JuegoException e) {
 			System.out.println(e.getMessage());
 		}
-
 	}
 
 	private static char solicitarMovimiento() {
@@ -88,9 +85,7 @@ public class Principal {
 		return juego;
 	}
 
-
 	private static TipoPersonaje solicitarTipoJugador() {
-		
 		TipoPersonaje tipo=null;
 		boolean hayError;
 
@@ -108,5 +103,4 @@ public class Principal {
 
 		return tipo;
 	}
-
 }
